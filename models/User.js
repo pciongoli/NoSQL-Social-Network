@@ -12,6 +12,7 @@ const UserSchema = new Schema(
       email: {
          type: String,
          unique: true,
+         // need to add validators
          match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
       },
 
@@ -20,6 +21,9 @@ const UserSchema = new Schema(
          default: Date.now,
       },
    },
+   // need to add thoughts array of _id values references the Thought model
+
+   // need to add friends array of _id values references the User model (self referenced)
    {
       toJSON: {
          virtuals: true,
