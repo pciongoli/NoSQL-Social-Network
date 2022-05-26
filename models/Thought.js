@@ -1,6 +1,6 @@
 const { model, Types, Schema } = require("mongoose");
 // need to import utils/dateFormat
-// const dateFormat = require('../utils/dateFormat)
+const dateFormat = require("../utils/dateFormat");
 
 // create ReactionSchema Schema consisiting of reactionId, username, createdAt
 const ReactionSchema = new Schema(
