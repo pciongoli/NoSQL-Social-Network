@@ -1,5 +1,5 @@
 // require express
-const router = require("express").Router;
+const router = require("express").Router();
 
 // declare each of the routes
 const {
@@ -9,13 +9,13 @@ const {
    removeThought,
    addReaction,
    removeReaction,
-} = require("../controllers/thought-controller");
+} = require("../../controllers/thought-controller");
 
 // /api/thoughts
 router.route("/").get(getAllThoughts);
 
 // /api/user/:id
-router.route("/:userId").post(addThought);
+router.route("/:userId").post(createThought);
 
 // /api/thoughtId
 router
