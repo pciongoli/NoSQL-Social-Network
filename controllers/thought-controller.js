@@ -1,7 +1,7 @@
 const res = require("express/lib/response");
 const { Thought, User, Types } = require("../models");
 
-const ThoughtController = {
+const thoughtController = {
    // Get all thoughts
    getAllThoughts(req, res) {
       Thought.find({})
@@ -34,7 +34,7 @@ const ThoughtController = {
    },
 
    // post to create new thought
-   addThought({ params, body }, res) {
+   createThought({ params, body }, res) {
       Thought.create(body)
          .then(
             { _id: params.userId },
@@ -53,11 +53,57 @@ const ThoughtController = {
          .catch((err) => res.json(err));
    },
 
-   // Update a thought through its _id value
+   // post to create reaction stored in single thought's reactions array field
+   addReaction({ params, body }, res) {
+      Thought.findOneAndUpdate(
+         { _id: params.thoughtId },
+         { $push: { reactions: body } },
+         { new: true, runValidators: true }
+      )
+         .then((dbThoughtData) => {
+            if (!dbThoughtData) {
+               res.status(404).json({
+                  message: "No thought found with this ID!",
+               });
+               return;
+            }
+            res.json(dbThoughtData);
+         })
+         .catch((err) => res.json(err));
+   },
 
    // Delete a thought through its _id value
+   removeThought({ params }, res) {
+      Thought.findOneAndDelete({ _id: params.thoughtId })
+         .then((deletedThought) => {
+            if (!deletedThought) {
+               return res
+                  .status(404)
+                  .json({ message: "There is no thought found with this ID!" });
+            }
+            // remove users associatied thoughts when deleted
+            return User.findOneAndUpdate(
+               { _id: params.username },
+               { $pull: { thoughts: params.thoughtId } },
+               { new: true }
+            );
+         })
+         .then((dbUserData) => {
+            res.json(dbUserData);
+         })
+         .catch((err) => res.json(err));
+   },
 
-   // post to create reaction stored in single thought's reactions array field
-
-   // delete to pull and remove reaction by reactionId value
+   // remove a reaction, pull and remove reaction by reactionId value
+   removeReaction({ params }, res) {
+      Thought.findOneAndUpdate(
+         { _id: params.thoughtId },
+         { $pull: { reactions: { reactionId: params.reactionId } } },
+         { new: true }
+      )
+         .then((dbThoughtData) => res.json(dbThoughtData))
+         .catch((err) => res.json(err));
+   },
 };
+
+module.exports = thoughtController;
