@@ -1,4 +1,3 @@
-const res = require("express/lib/response");
 const { Thought, User, Types } = require("../models");
 
 const thoughtController = {
