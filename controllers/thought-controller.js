@@ -35,11 +35,13 @@ const thoughtController = {
    // post to create new thought
    createThought({ params, body }, res) {
       Thought.create(body)
-         .then(
-            { _id: params.userId },
-            { $push: { thoughts: _id } },
-            { new: true }
-         )
+         .then(({ _id }) => {
+            return User.findOneAndUpdate(
+               { _id: params.userId },
+               { $push: { thoughts: _id } },
+               { new: true }
+            );
+         })
          .then((dbUserData) => {
             if (!dbUserData) {
                res.status(400).json({
@@ -100,7 +102,7 @@ const thoughtController = {
          { $pull: { reactions: { reactionId: params.reactionId } } },
          { new: true }
       )
-         .then((dbThoughtData) => res.json(dbThoughtData))
+         .then((dbUserData) => res.json(dbUserData))
          .catch((err) => res.json(err));
    },
 };
