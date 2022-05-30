@@ -56,13 +56,12 @@ const thoughtController = {
 
    // put to update a thought by its thoughtId
    updateThought({ params, body }, res) {
-      Thought.findOneAndUpdate({ _id: paramas.id }, body, {
+      Thought.findOneAndUpdate({ _id: params.id }, body, {
          new: true,
          runValidators: true,
       })
          .populate({ path: "reactions", select: "-__v" })
          .select("-__v")
-
          .then((dbThoughtData) => {
             if (!dbThoughtData) {
                res.status(400).json({
@@ -72,7 +71,7 @@ const thoughtController = {
             }
             res.json(dbThoughtData);
          })
-         .catch((err) => res.status(400).json(err));
+         .catch((err) => res.json(err));
    },
 
    // post to create reaction stored in single thought's reactions array field
