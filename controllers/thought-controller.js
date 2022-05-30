@@ -54,6 +54,24 @@ const thoughtController = {
          .catch((err) => res.json(err));
    },
 
+   // put to update a thought by its thoughtId
+   updateThought({ params, body }, res) {
+      Thought.findOneAndUpdate({ _id: paramas.id }, body, {
+         new: true,
+         runValidators: true,
+      })
+         .then((dbThoughtData) => {
+            if (!dbThoughtData) {
+               res.status(400).json({
+                  message: "please enter a valid thought id!",
+               });
+               return;
+            }
+            res.json(dbThoughtData);
+         })
+         .catch((err) => res.status(400).json(err));
+   },
+
    // post to create reaction stored in single thought's reactions array field
    addReaction({ params, body }, res) {
       Thought.findOneAndUpdate(
