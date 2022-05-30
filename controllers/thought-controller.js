@@ -1,4 +1,4 @@
-const { Thought, User, Types } = require("../models");
+const { Thought, User } = require("../models");
 
 const thoughtController = {
    // Get all thoughts
@@ -60,10 +60,13 @@ const thoughtController = {
          new: true,
          runValidators: true,
       })
+         .populate({ path: "reactions", select: "-__v" })
+         .select("-__v")
+
          .then((dbThoughtData) => {
             if (!dbThoughtData) {
                res.status(400).json({
-                  message: "please enter a valid thought id!",
+                  message: "Please enter a valid thought id!",
                });
                return;
             }
@@ -82,7 +85,7 @@ const thoughtController = {
          .then((dbThoughtData) => {
             if (!dbThoughtData) {
                res.status(404).json({
-                  message: "No thought found with this ID!",
+                  message: "Please enter a valid thought id!",
                });
                return;
             }
@@ -96,12 +99,13 @@ const thoughtController = {
       Thought.findOneAndDelete({ _id: params.thoughtId })
          .then((deletedThought) => {
             if (!deletedThought) {
-               return res
-                  .status(404)
-                  .json({ message: "There is no thought found with this ID!" });
+               res.status(404).json({
+                  message: "Please enter a valid thought id!",
+               });
+               return;
             }
             // remove users associatied thoughts when deleted
-            return User.findOneAndUpdate(
+            User.findOneAndUpdate(
                { _id: params.username },
                { $pull: { thoughts: params.thoughtId } },
                { new: true }
@@ -120,8 +124,16 @@ const thoughtController = {
          { $pull: { reactions: { reactionId: params.reactionId } } },
          { new: true }
       )
-         .then((dbUserData) => res.json(dbUserData))
-         .catch((err) => res.json(err));
+         .then((dbThoughtData) => {
+            if (!dbThoughtData) {
+               res.status(404).json({
+                  message: "Please enter a valid thought id!",
+               });
+               return;
+            }
+            res.json(dbThoughtData);
+         })
+         .catch((err) => res.status(400).json(err));
    },
 };
 
