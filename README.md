@@ -1,9 +1,7 @@
-# 18 NoSQL: Social Network API
+# NoSQL: Social Network API
 
 ## Link to Deployed Video Demonstration
-
--  User, Thoughts and Reactions
-   https://drive.google.com/file/d/1jPd7Q7vDX4-4RWwCfGy5dq8Albk4-9FS/view
+- https://drive.google.com/file/d/1jPd7Q7vDX4-4RWwCfGy5dq8Albk4-9FS/view
 
 MongoDB is a popular choice for many social networks due to its speed with large amounts of data and flexibility with unstructured data. Over the last part of this course, you’ll use several of the technologies that social networking platforms use in their full-stack applications. Because the foundation of these applications is data, it’s important that you understand how to build and structure the API first.
 
@@ -17,20 +15,6 @@ Because this application won’t be deployed, you’ll also need to create a wal
 AS A social media startup
 I WANT an API for my social network that uses a NoSQL database
 SO THAT my website can handle large amounts of unstructured data
-```
-
-## Acceptance Criteria
-
-```md
-GIVEN a social network API
-WHEN I enter the command to invoke the application
-THEN my server is started and the Mongoose models are synced to the MongoDB database
-WHEN I open API GET routes in Insomnia for users and thoughts
-THEN the data for each of these routes is displayed in a formatted JSON
-WHEN I test API POST, PUT, and DELETE routes in Insomnia
-THEN I am able to successfully create, update, and delete users and thoughts in my database
-WHEN I test API POST and DELETE routes in Insomnia
-THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
 ```
 
 ## Mock-Up
@@ -54,12 +38,6 @@ Your walkthrough video should also show the POST, PUT, and DELETE routes for tho
 The final animation shows the POST and DELETE routes for a user’s friend list being tested in Insomnia:
 
 ![Homework Demo 04](./Assets/18-nosql-homework-demo-04.gif)
-
-Your walkthrough video should also show the POST and DELETE routes for reactions to thoughts being tested in Insomnia.
-
-## Getting Started
-
-Use the following guidelines to set up your models and API routes:
 
 ### Models
 
@@ -210,14 +188,3 @@ This will not be a model, but rather used as the `reaction` field's subdocument 
 
 -  `DELETE` to pull and remove a reaction by the reaction's `reactionId` value
 
-## Review
-
-You are required to submit BOTH of the following for review:
-
--  A walkthrough video demonstrating the functionality of the application and all of the acceptance criteria being met.
-
--  The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
-
----
-
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
