@@ -3,11 +3,7 @@
 ## Link to Deployed Video Demonstration
 - https://drive.google.com/file/d/1jPd7Q7vDX4-4RWwCfGy5dq8Albk4-9FS/view
 
-MongoDB is a popular choice for many social networks due to its speed with large amounts of data and flexibility with unstructured data. Over the last part of this course, you’ll use several of the technologies that social networking platforms use in their full-stack applications. Because the foundation of these applications is data, it’s important that you understand how to build and structure the API first.
-
-Your challenge is to build an API for a social network using Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition to using the [Express](https://www.npmjs.com/package/express) and [Mongoose](https://www.npmjs.com/package/mongoose) packages, you may also optionally use a JavaScript date library of your choice or the native JavaScript `Date` object to format timestamps.
-
-Because this application won’t be deployed, you’ll also need to create a walkthrough video that demonstrates its functionality and all of the following acceptance criteria being met. You’ll need to submit a link to the video and add it to the README of your project.
+For this project I built an API for a social network using Express.js for routing, a MongoDB database, and the Mongoose ODM. 
 
 ## User Story
 
@@ -138,16 +134,14 @@ This will not be a model, but rather used as the `reaction` field's subdocument 
 ```json
 // example data
 {
-   "username": "lernantino",
-   "email": "lernantino@gmail.com"
+   "username": "patrick",
+   "email": "patrick@gmail.com"
 }
 ```
 
 -  `PUT` to update a user by its `_id`
 
 -  `DELETE` to remove user by its `_id`
-
-**BONUS**: Remove a user's associated thoughts when deleted
 
 ---
 
@@ -187,4 +181,11 @@ This will not be a model, but rather used as the `reaction` field's subdocument 
 -  `POST` to create a reaction stored in a single thought's `reactions` array field
 
 -  `DELETE` to pull and remove a reaction by the reaction's `reactionId` value
+
+## Reach out to me
+
+- Patrick Ciongoli
+- patrick.ciongoli@gmail.com
+
+Thanks for viewing!
 
